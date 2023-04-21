@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Need to send WhatsApp to a number not in your contacts?</title>
+</head>
+<body>
+    <h2>Just bring the number and click on take me to WhatsApp</h2>
+    <label for="phone">Phone:</label>
+    <select id="countryCode">
+        <option value="972">Israel (+972)</option>
+    </select>
+    <input type="tel" id="phone" pattern="\d{3}-\d{4}" maxlength="10" placeholder="0541234567">
+    <button id="sendToWhatsApp">Take me to WhatsApp</button>
+
+    <script>
+        document.getElementById("sendToWhatsApp").addEventListener("click", function() {
+            var countryCode = document.getElementById("countryCode").value;
+            var phoneNumber = document.getElementById("phone").value.replace(/[^\d]/g, '');
+            if (phoneNumber.startsWith('0')) {
+                phoneNumber = phoneNumber.substr(1);
+            }
+            var whatsappUrl = "https://api.whatsapp.com/send?phone=https://wa.me/" + countryCode + phoneNumber;
+            window.location.href = whatsappUrl;
+        });
+    </script>
+</body>
+</html>
